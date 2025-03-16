@@ -30,3 +30,14 @@ jobs:
           fallback-template: |
             filename:{{pubdate}}-{{title}}.md
             filepath:docs/{{owner.name}}
+      - name: Assert Outputs
+        shell: bash
+        run: |
+          expected_filename="3b1b.md"
+          expected_filepath="docs/88461692"
+          actual_filename="${{ steps.test-action.outputs.filename }}"
+          actual_filepath="${{ steps.test-action.outputs.filepath }}"
+          if [ "$actual_filename" != "$expected_filename" ] || [ "$actual_filepath" != "$expected_filepath" ]; then
+            echo "Assertion failed: expected filename '$expected_filename' and filepath '$expected_filepath', but got filename '$actual_filename' and filepath '$actual_filepath'"
+            exit 1
+          fi
