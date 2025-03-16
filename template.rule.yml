@@ -1,0 +1,6 @@
+- id: 3b1b
+  and:
+    mid: 88461692
+  template:
+    filename: {{pubdate}}-{{title}}.md
+    filepath: docs/{{owner.name}}

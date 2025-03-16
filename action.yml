@@ -1,0 +1,21 @@
+name: simple-format-action
+description: format and set output variable with given data and template
+author: kt
+branding:
+  icon: heart
+  color: red
+inputs:
+  data:
+    description: data
+  rule-file:
+    description: rule file path
+    required: false
+  template:
+    description: template kv
+    required: false
+  fallback-template:
+    description: fallback template kv
+    required: false
+runs:
+  using: node20
+  main: dist/index.js

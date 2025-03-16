@@ -1,0 +1,32 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test-action:
+    name: GitHub Actions Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+      - name: get and bili video metadata
+        id: bili
+        uses: ktKongTong/bili-action@v0.2.4
+        with:
+          bvid: BV1Gs411R7Yo
+      - name: Test Local Action
+        id: test-action
+        uses: ./
+        with:
+          data: ${{ steps.bili.outputs.video }}
+          fallback-template: |
+            filename:{{pubdate}}-{{title}}.md
+            filepath:docs/{{owner.name}}
