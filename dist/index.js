@@ -39146,9 +39146,12 @@ const handleTemplate = (template, data) => {
         coreExports.setOutput(k, render(template[k], data));
     }
 };
+function isNotEmpty(obj) {
+    return Object.keys(obj).length !== 0;
+}
 function main() {
     const input = parseInput();
-    if (input.template) {
+    if (isNotEmpty(input.template)) {
         handleTemplate(input.template, input.data);
         return;
     }
@@ -39165,7 +39168,7 @@ function main() {
         }
     }
     coreExports.info(`not found matched preset rule, use fallback rule`);
-    if (input.fallbackTemplate) {
+    if (isNotEmpty(input.fallbackTemplate)) {
         handleTemplate(input.fallbackTemplate, input.data);
         return;
     }

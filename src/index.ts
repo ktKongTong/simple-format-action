@@ -40,10 +40,12 @@ const handleTemplate = (template: Record<string, string>, data: any) => {
     core.setOutput(k, render(template[k], data));
   }
 };
-
+function isNotEmpty(obj: any) {
+  return Object.keys(obj).length !== 0;
+}
 function main() {
   const input = parseInput();
-  if (input.template) {
+  if (isNotEmpty(input.template)) {
     handleTemplate(input.template, input.data);
     return;
   }
@@ -60,7 +62,7 @@ function main() {
     }
   }
   core.info(`not found matched preset rule, use fallback rule`);
-  if (input.fallbackTemplate) {
+  if (isNotEmpty(input.fallbackTemplate)) {
     handleTemplate(input.fallbackTemplate, input.data);
     return;
   }
