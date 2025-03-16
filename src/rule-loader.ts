@@ -15,7 +15,7 @@ export const readRuleFromFile = (file: string) => {
       rules = RuleItemSchema.array().parse(res) as TemplateRule[];
     } catch (e) {
       // @ts-ignore
-      core.error(`read rule file [${file}] error: ${e?.message}`);
+      core.warning(`read rule file [${file}] error: ${e?.message}`);
     }
   } else {
     core.info(`rule file not exist: ${file}`);

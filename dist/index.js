@@ -32143,7 +32143,7 @@ const RuleSchema = z.lazy(() => z
     and: RuleSchema.optional(),
     or: RuleSchema.optional(),
 })
-    .catchall(z.string()));
+    .catchall(z.coerce.string()));
 const RuleItemSchema = z.object({
     id: z.string(),
     and: RuleSchema.optional(),
@@ -32164,7 +32164,7 @@ const applyRuleItem = (rule, data) => {
         return reg.test(v);
     }
     catch (e) {
-        coreExports.error(
+        coreExports.warning(
         // @ts-ignore
         `some error happen while applying rule ${JSON.stringify(rule)}: ${e?.message}`);
         return false;
@@ -32222,7 +32222,7 @@ const testRule = (matchRule, data, cur = "and") => {
         return false;
     }
     catch (e) {
-        coreExports.error(`some error happen while apply rules, ${e?.toString()}`);
+        coreExports.warning(`some error happen while apply rules, ${e?.toString()}`);
         return false;
     }
 };
@@ -39082,7 +39082,7 @@ const readRuleFromFile = (file) => {
         }
         catch (e) {
             // @ts-ignore
-            coreExports.error(`read rule file [${file}] error: ${e?.message}`);
+            coreExports.warning(`read rule file [${file}] error: ${e?.message}`);
         }
     }
     else {

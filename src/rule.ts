@@ -18,7 +18,7 @@ export const RuleSchema: z.ZodType<Rule> = z.lazy(() =>
       and: RuleSchema.optional(),
       or: RuleSchema.optional(),
     })
-    .catchall(z.string()),
+    .catchall(z.coerce.string()),
 );
 
 export const RuleItemSchema = z.object({
@@ -52,7 +52,7 @@ const applyRuleItem = (rule: RuleItem, data: any) => {
     const reg = new RegExp(rule.cond);
     return reg.test(v);
   } catch (e) {
-    core.error(
+    core.warning(
       // @ts-ignore
       `some error happen while applying rule ${JSON.stringify(rule)}: ${e?.message}`,
     );
@@ -109,7 +109,7 @@ export const testRule = (
     core.warning(`unexpected match rule type: ${JSON.stringify(matchRule)}`);
     return false;
   } catch (e) {
-    core.error(`some error happen while apply rules, ${e?.toString()}`);
+    core.warning(`some error happen while apply rules, ${e?.toString()}`);
     return false;
   }
 };
