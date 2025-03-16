@@ -1,6 +1,6 @@
 - id: 3b1b
   and:
-    mid: 88461692
+    owner.mid: 88461692
   template:
     filename: "3b1b.md"
     filepath: "docs/{{owner.mid}}"
