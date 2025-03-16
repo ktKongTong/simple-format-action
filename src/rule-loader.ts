@@ -10,9 +10,7 @@ export const readRuleFromFile = (file: string) => {
   if (fs.existsSync(file)) {
     try {
       const text = fs.readFileSync(file, "utf-8");
-      const res = parse(text, {
-        stringKeys: true,
-      });
+      const res = parse(text);
       core.debug(`yaml parsed result: ${JSON.stringify(res)}`);
       rules = RuleItemSchema.array().parse(res) as TemplateRule[];
     } catch (e) {

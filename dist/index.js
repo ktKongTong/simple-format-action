@@ -39057,12 +39057,6 @@ function parseDocument(source, options = {}) {
 }
 function parse(src, reviver, options) {
     let _reviver = undefined;
-    if (typeof reviver === 'function') {
-        _reviver = reviver;
-    }
-    else if (options === undefined && reviver && typeof reviver === 'object') {
-        options = reviver;
-    }
     const doc = parseDocument(src, options);
     if (!doc)
         return null;
@@ -39082,9 +39076,7 @@ const readRuleFromFile = (file) => {
     if (fs.existsSync(file)) {
         try {
             const text = fs.readFileSync(file, "utf-8");
-            const res = parse(text, {
-                stringKeys: true,
-            });
+            const res = parse(text);
             coreExports.debug(`yaml parsed result: ${JSON.stringify(res)}`);
             rules = RuleItemSchema.array().parse(res);
         }

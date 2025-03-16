@@ -2,5 +2,5 @@
   and:
     mid: 88461692
   template:
-    filename: {{pubdate}}-{{title}}.md
-    filepath: docs/{{owner.name}}
+    filename: "{{pubdate}}-{{title}}.md"
+    filepath: "docs/{{owner.name}}"
