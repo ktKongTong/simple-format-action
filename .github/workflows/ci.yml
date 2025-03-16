@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
       - name: get and bili video metadata
         id: bili
-        uses: ktKongTong/bili-action@v0.2.4
+        uses: ktKongTong/bili-action@v0.2.5
         with:
           bvid: BV1Gs411R7Yo
       - name: Test Local Action
